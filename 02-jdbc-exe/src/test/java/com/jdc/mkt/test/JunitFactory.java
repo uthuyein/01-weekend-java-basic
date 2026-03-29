@@ -9,18 +9,38 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class JunitFactory {
 
-	
-	private static List<String> list = List.of(
-			"SET FOREIGN_KEY_CHECKS = 0",
-			"truncate table category_tbl",
-			"truncate table product_tbl",
-			"INSERT INTO category_tbl(name,category_id) VALUES('Dry Fruits',1)",
-			"INSERT INTO category_tbl(name,category_id) VALUES('Fresh Fruits',1)",
-			"INSERT INTO category_tbl(name,category_id) VALUES('Hot Drinks',2)",
-			"INSERT INTO category_tbl(name,category_id) VALUES('Cold Drinks',2)",
+	private static List<String> ddlList = List.of(
+			"drop database if exists testDb",
+			"create database testDb",
+			"use testDb",
+			"""
+			create table category_tbl(
+				id int primary key auto_increment,
+				name varchar(45) not null unique,
+				is_active tinyint(1) default 1
+				);
+			""",
+			"""
+			create table product_tbl(
+				id int primary key auto_increment,
+				category_id int,
+				name varchar(45) not null ,
+				price double not null ,
+				is_active tinyint(1) default 1,
+				foreign key (category_id) references category_tbl(id)
+				);
+			"""
+			
+			);
+	private static List<String> initList = List.of(
+			"set foreign_key_checks = 0",
+			"INSERT INTO category_tbl(name) VALUES('Dry Fruits')",
+			"INSERT INTO category_tbl(name) VALUES('Fresh Fruits')",
+			"INSERT INTO category_tbl(name) VALUES('Hot Drinks')",
+			"INSERT INTO category_tbl(name) VALUES('Cold Drinks')",
 			"INSERT INTO product_tbl(name,price,category_id) VALUES('Banana',1200.00,4)",
 			"INSERT INTO product_tbl(name,price,category_id) VALUES('Orange',1500.00,4)",
-			"SET FOREIGN_KEY_CHECKS = 1"
+			"set foreign_key_checks = 1"
 			);
 	
 	@BeforeAll
@@ -28,7 +48,10 @@ public class JunitFactory {
 		try(var con = getConnection();
 			var stmt = con.createStatement()){
 			
-			for(String str: list) {
+			for(String str: ddlList) {
+				stmt.addBatch(str);
+			}
+			for(String str:initList) {
 				stmt.addBatch(str);
 			}
 			
