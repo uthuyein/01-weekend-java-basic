@@ -38,8 +38,8 @@ public class JunitFactory {
 			"INSERT INTO category_tbl(name) VALUES('Fresh Fruits')",
 			"INSERT INTO category_tbl(name) VALUES('Hot Drinks')",
 			"INSERT INTO category_tbl(name) VALUES('Cold Drinks')",
-			"INSERT INTO product_tbl(name,price,category_id) VALUES('Banana',1200.00,4)",
-			"INSERT INTO product_tbl(name,price,category_id) VALUES('Orange',1500.00,4)",
+			"INSERT INTO product_tbl(name,price,category_id) VALUES('Banana',1200.00,2)",
+			"INSERT INTO product_tbl(name,price,category_id) VALUES('Orange',1500.00,2)",
 			"set foreign_key_checks = 1"
 			);
 	
