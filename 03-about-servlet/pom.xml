@@ -54,5 +54,8 @@
 	<modules>
 		<module>01-servlet-information</module>
 		<module>02-servlet-communication</module>
+		
+		<module>03-servlet-scope-with-jsp</module>
+		<module>04-servlet-with-jspTag-jstl</module>
 	</modules>
 </project>
