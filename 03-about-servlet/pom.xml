@@ -26,6 +26,14 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>11.0.26</version>
+				<configuration>
+					<scan>2</scan>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.4.0</version>
@@ -45,5 +53,6 @@
 	</build>
 	<modules>
 		<module>01-servlet-information</module>
+		<module>02-servlet-communication</module>
 	</modules>
 </project>
