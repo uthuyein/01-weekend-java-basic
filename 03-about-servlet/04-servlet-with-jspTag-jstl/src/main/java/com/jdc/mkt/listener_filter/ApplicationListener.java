@@ -1,13 +1,16 @@
-package com.jdc.mkt.test;
+package com.jdc.mkt.listener_filter;
 
 import static com.jdc.mkt.utils.MySqlConnector.getConnection;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.annotation.WebListener;
 
-public class JunitFactory {
+@WebListener
+public class ApplicationListener implements ServletContextListener{
 
 	private static List<String> ddlList = List.of(
 			"drop database if exists testDb",
@@ -17,7 +20,7 @@ public class JunitFactory {
 			create table category_tbl(
 				id int primary key auto_increment,
 				name varchar(45) not null unique,
-				
+				create_date date default (current_date),
 				is_active tinyint(1) default 1
 				);
 			""",
@@ -27,6 +30,7 @@ public class JunitFactory {
 				category_id int,
 				name varchar(45) not null ,
 				price double not null ,
+				create_date date default (current_date),
 				is_active tinyint(1) default 1,
 				foreign key (category_id) references category_tbl(id)
 				);
@@ -44,7 +48,7 @@ public class JunitFactory {
 			"set foreign_key_checks = 1"
 			);
 	
-	@BeforeAll
+	
 	static void init() {
 		try(var con = getConnection();
 			var stmt = con.createStatement()){
@@ -64,4 +68,9 @@ public class JunitFactory {
 		}
 	}
 	
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		System.out.println("Servlet Context Object");
+		init();
+	}
 }

@@ -5,6 +5,8 @@
 
 
 <div class="container mt-2 p-2">
-	 <h3 class="text-primary"><c:out value="${pageName }"></c:out></h3>
-	<jsp:doBody></jsp:doBody>
+	 <h3 class="text-primary mb-3"><c:out value="${pageName }"></c:out></h3>
+	<div class="W-75">
+		<jsp:doBody></jsp:doBody>
+	</div>
 </div>
