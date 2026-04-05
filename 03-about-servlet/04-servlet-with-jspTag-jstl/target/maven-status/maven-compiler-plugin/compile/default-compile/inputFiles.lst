@@ -4,4 +4,6 @@
 /Users/MKT/git/01-weekend-java-basic/03-about-servlet/04-servlet-with-jspTag-jstl/src/main/java/com/jdc/mkt/entity/Category.java
 /Users/MKT/git/01-weekend-java-basic/03-about-servlet/04-servlet-with-jspTag-jstl/src/main/java/com/jdc/mkt/entity/Product.java
 /Users/MKT/git/01-weekend-java-basic/03-about-servlet/04-servlet-with-jspTag-jstl/src/main/java/com/jdc/mkt/listener_filter/ApplicationListener.java
+/Users/MKT/git/01-weekend-java-basic/03-about-servlet/04-servlet-with-jspTag-jstl/src/main/java/com/jdc/mkt/services/CategoryService.java
+/Users/MKT/git/01-weekend-java-basic/03-about-servlet/04-servlet-with-jspTag-jstl/src/main/java/com/jdc/mkt/services/CrudOperation.java
 /Users/MKT/git/01-weekend-java-basic/03-about-servlet/04-servlet-with-jspTag-jstl/src/main/java/com/jdc/mkt/utils/MySqlConnector.java

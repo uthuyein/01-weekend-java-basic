@@ -19,23 +19,38 @@
 		</div>
 			<button class="btn btn-outline-primary">Submit</button>
 		</form>
-		
-		<table class="table table-stripped table-hover">
-			<thead>
-				<tr>
-					<th>No.</th>
-					<th>Name</th>
-					<th>Create At</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+		<c:choose>
+			<c:when test="${categories ne null }">
+				<table class="table table-stripped table-hover">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>Name</th>
+							<th>Create At</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="cat" items="${categories }" varStatus="i" >
+							<tr>
+							<td>${i.index +1}</td>
+							<td>${cat.name }</td>
+							<td>${cat.createDate }</td>
+							<td>
+								<div class="row">
+									<div class="col-sm"><a href="updateCategory?id=${cat.id}" class="btn btn-outline-primary">Update</a></div>
+									<div class="col-sm"><a href="deleteCategory?id=${cat.id}" class="btn btn-outline-danger">Delete</a></div>
+								</div>
+							</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:when>
+			<c:otherwise>
+				<p class="text-primary">There is no categories !</p>
+			</c:otherwise>
+		</c:choose>
 	</common:content>
 </body>
 </html>
