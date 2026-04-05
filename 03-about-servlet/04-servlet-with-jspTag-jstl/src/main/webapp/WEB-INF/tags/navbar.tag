@@ -10,7 +10,6 @@
     </button>
     <div class="collapse navbar-collapse" id="productNav">
       <div class="navbar-nav">
-        <a class="nav-link " aria-current="page" href="#">Test Products</a>
         <a class="nav-link" href="categories">Category</a>
         <a class="nav-link" href="products">Product</a>
       </div>

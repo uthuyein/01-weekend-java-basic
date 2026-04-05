@@ -1,7 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ attribute name="pageName" required="true" type="java.lang.String" %>
+<%@ attribute name="pageName" required="false" type="java.lang.String" %>
 
 
 <div class="container mt-2 p-2">
