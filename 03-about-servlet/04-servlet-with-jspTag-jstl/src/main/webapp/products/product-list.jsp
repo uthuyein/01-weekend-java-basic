@@ -10,6 +10,7 @@
 <body>
 	<common:navbar></common:navbar>
 	<common:content pageName="Product Page">
+		
 	</common:content> 
 </body>
 </html>

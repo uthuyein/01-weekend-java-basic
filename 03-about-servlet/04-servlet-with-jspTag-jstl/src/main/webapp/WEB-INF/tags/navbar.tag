@@ -12,6 +12,7 @@
       <div class="navbar-nav">
         <a class="nav-link" href="categories">Category</a>
         <a class="nav-link" href="products">Product</a>
+         <a class="nav-link" href="addProduct">New Product</a>
       </div>
     </div>
   </div>

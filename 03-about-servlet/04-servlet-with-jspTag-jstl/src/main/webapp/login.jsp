@@ -12,8 +12,8 @@
 	<common:content>
 	<div class="d-flex justify-content-center">
 			<form class=" border border-2 p-3 w-50 border-primary-subtle rounded-end">
-			<p class="fs-3">Login Form</p>
-		
+			<p class="fs-3 text-primary">Login Form</p>
+			<hr />		
 				<div class="mb-3">
 					<label for="email" class="form-label">LoginId</label> <input
 						type="email" class="form-control" id="email">

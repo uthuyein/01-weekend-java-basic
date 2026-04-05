@@ -18,6 +18,7 @@ public class CounterServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
 //		Request Scope
 		Counter counter1 = (Counter) req.getAttribute(COUNTER);
 		
@@ -25,6 +26,7 @@ public class CounterServlet extends HttpServlet{
 			counter1 = new Counter();
 		}
 		counter1.countUp();
+		
 		req.setAttribute(COUNTER, counter1);
 		
 //		Session Scope

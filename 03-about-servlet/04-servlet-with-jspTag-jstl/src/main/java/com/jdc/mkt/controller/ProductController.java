@@ -8,14 +8,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/products"})
+@WebServlet(urlPatterns = {"/products","/addProduct"})
 public class ProductController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
-		req.getRequestDispatcher("/products/product-list.jsp").forward(req, resp);
+		String name = req.getServletPath().equals("/addProduct")?"product-add":"product-list";
+		
+		req.getRequestDispatcher("/products/"+name+".jsp").forward(req, resp);
 	}
 	
 	@Override
