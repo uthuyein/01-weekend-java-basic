@@ -8,8 +8,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-@WebServlet(urlPatterns = "/",loadOnStartup = 1)
+/*
+ * Absolute path(root) is  start with / or C:
+ * Relative path(current) is start with ./ or / or file name
+ * So relative path is not start with / or C:,..
+ */
+@WebServlet(urlPatterns = {"/"},loadOnStartup = 1)
 public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -23,9 +27,8 @@ public class HomeController extends HttpServlet {
 		var name = "login.jsp";
 			
 		if(null != session && (null != session.getAttribute("loginId") && session.getAttribute("loginId").equals(loginId))) {
-			name = "/products/product-list.jsp";
+			name = "/product/products.jsp";
 		}
-		
 		req.getRequestDispatcher(name).forward(req, resp);
 	}
 	
@@ -55,6 +58,6 @@ public class HomeController extends HttpServlet {
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
 		
-		req.getRequestDispatcher("/products/product-list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/product/products.jsp").forward(req, resp);
 	}
 }

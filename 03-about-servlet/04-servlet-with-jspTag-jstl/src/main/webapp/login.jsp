@@ -11,7 +11,7 @@
 	<common:navbar></common:navbar>
 	<common:content>
 	<div class="d-flex justify-content-center">
-			<form action="/" method="post" class=" border border-2 p-3 w-50 border-primary-subtle rounded-end" >
+			<form action="/" method="post" class=" border border-2 p-3 w-25 border-primary-subtle rounded-end" >
 			<p class="fs-3 text-primary">Login Form</p>
 			<hr />		
 				<div class="mb-3">
@@ -23,7 +23,7 @@
 						type="password" class="form-control" name="password">
 				</div>
 				<div class="mb-3 form-check">
-					<input type="checkbox" class="form-check-input" name="saveId" >
+					<input type="checkbox" class="form-check-input" name="saveId" checked>
 					<label class="form-check-label" for="saveId">Save
 						Password</label>
 				</div>

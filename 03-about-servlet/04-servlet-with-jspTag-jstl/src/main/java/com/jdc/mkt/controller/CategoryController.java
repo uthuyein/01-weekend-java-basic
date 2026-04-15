@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet({ "/categories", "/addCategory", "/updateCategory", "/deleteCategory" })
+@WebServlet({ "/category/categories", "/category/addCategory", "/category/updateCategory", "/category/deleteCategory" })
 public class CategoryController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -25,49 +25,46 @@ public class CategoryController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		var id = req.getParameter("id");
-		var name = req.getParameter("name");
-			System.out.println("ID :"+id);
-		if (null != id) {
-			var c = getCategory(name);
-			c.setId(Integer.parseInt(id));
-			c.setActive(false);
-			service.update(c);
+
+		switch (req.getServletPath()) {
+		case "/category/deleteCategory":
+			doPost(req, resp);
+			break;
+		case "/category/updateCategory":
+			req.setAttribute("category", checkCategory(req));
+			break;
 		}
-	
+
 		req.setAttribute("categories", service.selectAll());
-		req.getRequestDispatcher("/categories/category-list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/category/categories.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		var id = req.getParameter("id");
 		var name = req.getParameter("name");
-
-		if (null != id) {
-			var c = getCategory(name);
-			c.setId(Integer.parseInt(id));
-
-			switch (req.getServletPath()) {
-
-				case "/updateCategory": {
-					c.setActive(true);
-					break;
-				}
-				case "/deleteCategory": {
-					c.setActive(false);
-					break;
-				}
-			}
-			service.update(c);
-		}
-
-		if (null != name) {
+		var category = checkCategory(req);
+		
+		if (category == null) {
 			service.insert(getCategory(name));
-		}
-		resp.sendRedirect(getServletContext().getContextPath().concat("/categories"));
 
+		} else {
+			category.setActive(req.getServletPath().endsWith("/deleteCategory") ? false : true);
+			category.setName(category.isActive()?name:category.getName());
+			service.update(category);
+		}
+
+		req.setAttribute("categories", service.selectAll());
+		req.getRequestDispatcher("/category/categories.jsp").forward(req, resp);
+	}
+
+	private Category checkCategory(HttpServletRequest req) {
+		var id = req.getParameter("id");
+		if (null != id) {
+			var catId = Integer.parseInt(id);
+			var cat = service.findById(catId).orElse(null);
+			return cat;
+		}
+		return null;
 	}
 
 	private Category getCategory(String name) {

@@ -12,12 +12,13 @@
 <body>
 	<common:navbar></common:navbar>
 	<common:content pageName="Category Page">
-		<form action="/addCategory" method="post" class="w-50">
+		<form action="/category/addCategory" method="post" class="w-50 mb-4">
 		<div class="form-group mb-3">
 			<label for="name" class="form-label ">Category Name</label> 
-			<input type="text" name="name" class="form-control" />
+			<input type="hidden" name="id" class="form-control" value="${not empty category ? category.id : '' }" />
+			<input type="text" name="name" class="form-control" value="${not empty category ? category.name : '' }" />
 		</div>
-			<button class="btn btn-outline-primary">Submit</button>
+			<button class="btn btn-outline-primary">${not empty category ? 'Update Category':'Save Category'}</button>
 		</form>
 		<c:choose>
 			<c:when test="${categories ne null }">
@@ -37,9 +38,9 @@
 							<td>${cat.name }</td>
 							<td>${cat.createDate }</td>
 							<td>
-								<div class="row">
-									<div class="col-sm"><a href="updateCategory?id=${cat.id}" class="btn btn-outline-primary">Update</a></div>
-									<div class="col-sm"><a href="deleteCategory?id=${cat.id}" class="btn btn-outline-danger">Delete</a></div>
+								<div>
+									<a href="/category/updateCategory?id=${cat.id}" class="btn btn-outline-primary">Update</a>
+									<a href="/category/deleteCategory?id=${cat.id}" class="btn btn-outline-danger">Delete</a>
 								</div>
 							</td>
 						</tr>

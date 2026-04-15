@@ -2,9 +2,9 @@ package com.jdc.mkt.services;
 
 import static com.jdc.mkt.utils.MySqlConnector.getConnection;
 
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.jdc.mkt.entity.Category;
 
@@ -50,7 +50,6 @@ public class CategoryService implements CrudOperation<Category> {
 	@Override
 	public void update(Category t) {
 		String sql = "update category_tbl set name=? , is_active = ? where id = ?";
-		System.out.println("Active :"+t.isActive());
 		try (var con = getConnection(); 
 			var stmt = con.prepareStatement(sql)) {
 			stmt.setString(1, t.getName());
@@ -61,6 +60,31 @@ public class CategoryService implements CrudOperation<Category> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Optional<Category> findById(int id) {
+		
+		String sql = "select * from category_tbl where is_active != 0 and id = ?";
+		var cat = new Category();
+		
+		try (var con = getConnection(); 
+			var stmt = con.prepareStatement(sql)) {
+			
+			stmt.setInt(1, id);
+			var rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				cat.setId(rs.getInt("id"));
+				cat.setName(rs.getString("name"));
+				cat.setCreateDate(rs.getDate("create_date").toLocalDate());
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Optional.of(cat);
 	}
 
 }

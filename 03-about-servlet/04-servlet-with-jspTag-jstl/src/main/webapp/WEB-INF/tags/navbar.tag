@@ -10,9 +10,9 @@
     </button>
     <div class="collapse navbar-collapse" id="productNav">
       <div class="navbar-nav">
-        <a class="nav-link" href="categories">Category</a>
-        <a class="nav-link" href="products">Product</a>
-         <a class="nav-link" href="addProduct">New Product</a>
+        <a class="nav-link" href="/category/categories">Category</a>
+        <a class="nav-link" href="/product/products">Product</a>
+         <a class="nav-link" href="/product/addProduct">New Product</a>
       </div>
     </div>
   </div>
