@@ -11,7 +11,7 @@
 </head>
 <body>
 	<common:navbar></common:navbar>
-	<common:content pageName="Add Product Page">
+	<common:content pageName="Add Product Page" icon="bi bi-file-earmark-plus">
 		<form action="/product/addProduct" method="post" class="w-50 mb-4">
 		<input type="hidden" name="id" class="form-control" value="${not empty product ? product.id : '' }" />
 			<div class="form-group mb-3">

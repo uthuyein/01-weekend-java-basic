@@ -68,11 +68,20 @@ public class CategoryController extends HttpServlet {
 	}
 
 	private Category getCategory(String name) {
-		var cat = new Category();
-		cat.setName(name);
-		cat.setActive(true);
-		cat.setCreateDate(LocalDate.now());
-		return cat;
+		try {
+			if(null == name) {
+				throw new RuntimeException("Type Category name again !");
+			}
+			var cat = new Category();
+			cat.setName(name);
+			cat.setActive(true);
+			cat.setCreateDate(LocalDate.now());
+			return cat;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 

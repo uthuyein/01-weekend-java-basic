@@ -22,14 +22,7 @@ public class HomeController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		var session = req.getSession(false);
-		System.out.println(session);
-		var name = "login.jsp";
-			
-		if(null != session && (null != session.getAttribute("loginId") && session.getAttribute("loginId").equals(loginId))) {
-			name = "/product/products.jsp";
-		}
-		req.getRequestDispatcher(name).forward(req, resp);
+		req.getRequestDispatcher("/login.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -54,7 +47,6 @@ public class HomeController extends HttpServlet {
 			
 		}catch (Exception e) {
 			req.setAttribute("message", e.getMessage());
-			System.out.println(e.getMessage());
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
 		

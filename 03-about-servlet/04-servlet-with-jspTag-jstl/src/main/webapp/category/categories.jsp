@@ -11,7 +11,7 @@
 </head>
 <body>
 	<common:navbar></common:navbar>
-	<common:content pageName="Category Page">
+	<common:content pageName="Category Page" icon="bi bi-folder-plus">
 		<form action="/category/addCategory" method="post" class="w-50 mb-4">
 		<div class="form-group mb-3">
 			<label for="name" class="form-label ">Category Name</label> 

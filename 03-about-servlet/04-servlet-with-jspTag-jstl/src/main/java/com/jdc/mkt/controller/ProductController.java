@@ -13,8 +13,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = { "/product/products", "/product/addProduct", "/product/updateProduct",
-		"/product/deleteProuct" })
+@WebServlet(urlPatterns = { 
+		"/product/products", 
+		"/product/addProduct", 
+		"/product/updateProduct",
+		"/product/deleteProduct" })
 public class ProductController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -31,21 +34,25 @@ public class ProductController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("categories", catService.selectAll());
-		req.setAttribute("products", prodService.selectAll());
-
+		
 		switch (req.getServletPath()) {
-		case "/product/deleteProduct":
-			doPost(req, resp);
-			break;
-		case "/product/updateProduct":
-			req.setAttribute("product", checkProduct(req));
-			req.getRequestDispatcher("/product/addProduct.jsp").forward(req, resp);
-			break;
-		case "/product/addProduct":
-			req.getRequestDispatcher("/product/addProduct.jsp").forward(req, resp);
-			break;
+		
+			case "/product/deleteProduct":
+				var product = checkProduct(req);
+				product.setActive(false);
+				prodService.update(product);
+				break;
+				
+			case "/product/updateProduct":
+				req.setAttribute("product", checkProduct(req));
+				
+			case "/product/addProduct":
+				req.getRequestDispatcher("/product/addProduct.jsp").forward(req, resp);
+				break;
 		}
+		req.setAttribute("products", prodService.selectAll());	
 		req.getRequestDispatcher("/product/products.jsp").forward(req, resp);
+		
 	}
 
 	@Override
@@ -56,34 +63,27 @@ public class ProductController extends HttpServlet {
 		var cat_id = req.getParameter("cat_id");
 
 		var product = checkProduct(req);
-		
+
 		if (product == null) {
 			prodService.insert(getProduct(name, price, cat_id));
 
 		} else {
-			if (req.getServletPath().endsWith("/addProduct")) {
-				
-				System.out.println("Product ::: "+product);
-
-				var p = getProduct(name, price, cat_id);
-				
-				product.setName(p.getName());
-				product.setPrice(p.getPrice());
-				product.setCategory(p.getCategory());
-				product.setActive(true);
-				
-			} else {
-				product.setActive(false);
-
-			}
-			prodService.update(product);
 			
+			var p = getProduct(name, price, cat_id);
+			product.setName(p.getName());
+			product.setPrice(p.getPrice());
+			product.setCategory(p.getCategory());
+			product.setActive(true);
+			prodService.update(product);
+
 		}
+		
+	
 
-		req.setAttribute("categories", prodService.selectAll());
-		req.setAttribute("products", prodService.selectAll());
+	req.setAttribute("categories",prodService.selectAll());
+	req.setAttribute("products",prodService.selectAll());
+	req.getRequestDispatcher("/product/products.jsp").forward(req,resp);
 
-		req.getRequestDispatcher("/product/products.jsp").forward(req, resp);
 	}
 
 	private Product checkProduct(HttpServletRequest req) {

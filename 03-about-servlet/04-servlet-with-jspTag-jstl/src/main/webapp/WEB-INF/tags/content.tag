@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ attribute name="pageName" required="false" type="java.lang.String" %>
+<%@ attribute name="icon" required="false" type="java.lang.String" %>
 
 
 <div class="container mt-2 p-2">
-	 <h3 class="text-primary mb-3"><c:out value="${pageName }"></c:out></h3>
+	 <h3 class="text-primary mb-3"><i class="${icon }"></i>&nbsp;<c:out value="${pageName }"></c:out></h3>
 	<div class="W-75">
 		<jsp:doBody></jsp:doBody>
 	</div>

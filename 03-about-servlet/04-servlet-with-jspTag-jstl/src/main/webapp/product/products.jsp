@@ -11,7 +11,7 @@
 </head>
 <body>
 	<common:navbar></common:navbar>
-	<common:content pageName="Product Page">
+	<common:content pageName="Product Page" icon="bi bi-collection">
 		
 		<c:choose>
 			<c:when test="${products ne null }">

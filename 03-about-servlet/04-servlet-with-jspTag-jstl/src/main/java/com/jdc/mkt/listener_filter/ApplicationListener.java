@@ -70,7 +70,6 @@ public class ApplicationListener implements ServletContextListener{
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		System.out.println("Servlet Context Object");
 		init();
 	}
 }
